@@ -16,7 +16,7 @@ public class JMSProducer {
 
     public void sendMessage(String message) {
         try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)){
-            context.createProducer().send(context.createQueue("exampleQueue"), message);
+            context.createProducer().send(context.createQueue("colaexemplo"), message);
         } catch (JMSRuntimeException ex) {
             // handle exception (details omitted)
         }
