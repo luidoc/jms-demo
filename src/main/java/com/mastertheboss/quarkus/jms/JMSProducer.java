@@ -6,11 +6,15 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.JMSRuntimeException;
 import javax.jms.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @ApplicationScoped
 public class JMSProducer {
 
+	private static final Logger LOG = LoggerFactory.getLogger(JMSProducer.class);
+	
     @Inject
     ConnectionFactory connectionFactory;
 
@@ -18,7 +22,7 @@ public class JMSProducer {
         try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)){
             context.createProducer().send(context.createQueue("colaexemplo"), message);
         } catch (JMSRuntimeException ex) {
-            // handle exception (details omitted)
+        	LOG.info(ex.getMessage() + "\n");
         }
     }
 }
